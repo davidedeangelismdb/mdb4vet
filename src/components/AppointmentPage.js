@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PetForm from './PetForm';
 class AppointmentPage extends Component {
 
     componentWillMount() {
@@ -22,13 +23,14 @@ class AppointmentPage extends Component {
                 </div>
                 <form onSubmit={this.onSave}>
                     <div className="form-group">
-                        <label forHtml="exampleInputEmail1" >Patient Name</label>
-                        <input type="text" className="form-control" readOnly id="exampleInputEmail1" aria-describedby="emailHelp" value={petName}/>
-                    </div>
-                    <div className="form-group">
                         <label forHtml="exampleInputPassword1">Seeing Vet</label>
                         <input type="text" readOnly className="form-control" id="exampleInputPassword1" value={vetName}/>
                     </div>
+                    <div className="form-group">
+                        <label forHtml="exampleInputPassword1">Patient Name</label>
+                        <input type="text" readOnly className="form-control" id="exampleInputPassword1" value={petName}/>
+                    </div>
+                    <PetForm/>
                     <button type="submit" className="btn btn-primary">Save</button>
                 </form>
             </div>
