@@ -1,24 +1,76 @@
 import React, { Component } from 'react';
+import stitch from '../stitch/functions';
+
 class PetForm extends Component {
-
     state = {
-        prescriptions: [
-            { name: "some drug", active: true, id: 0 },
-            { name: "some other drug", active: true, id: 1 },
-            { name: "and another drug", active: false, id: 2 },
-            { name: "this drug", active: true, id: 3 },
-            { name: "this drug too", active: false, id: 4 },
-            { name: "almost last one", active: true, id: 5 },
-            { name: "last one!", active: false, id: 6 }
-        ],
-        gender: "male",
-        type: 'dog',
-        breed: "poodle",
-        lastVisit: new Date()
-
+        prescriptions: [],
+        gender: null,
+        type: null,
+        breed: null,
+        last_visit: null,
+        first_name: null,
+        last_name: null,
+        phone_number: null,
+        name : null,
+        _id : null
     }
-    componentWillMount() {
-        // TODO: query to find the id and populate fields
+
+    componentWillReceiveProps(props) {
+        const pet = props.pet;
+        const {_id } = pet;
+        const prescriptions = pet.prescriptions;
+        const { gender, breed, name, type, last_visit, photo} = pet.patient;
+        const { first_name, last_name, phone_number } = pet.owner;
+        this.setState({ prescriptions, gender, type, breed, last_visit, first_name, last_name, phone_number, name, _id, photo });
+    }
+
+    /*
+    {
+        "_id" : ObjectId("5bc63017094a567c340c812f"),
+        "patient" : {
+            "name" : "Cuddles",
+            "type" : "dog",
+            “Breed” : “poodle”
+            "gender" : "female",
+            "photo" : null,
+            "last_visit" : ISODate("2018-10-02T19:33:01Z")
+        },
+        "owner" : {
+            "first_name" : "Davide",
+            "last_name" : "De Angelis",
+            "phone_number" : "2223334444"
+        },
+        "prescriptions" : [
+            {
+                "name" : "anti-nausea",
+                "start" : ISODate("2018-09-10T00:00:00Z"),
+                "end" : ISODate("2018-09-17T00:00:00Z"),
+                “active” : true
+            }
+        ]
+    }
+    */
+    onSave = () => {
+        const { _id, name, prescriptions, gender, breed, type, last_visit, first_name, last_name, phone_number, photo } = this.state;
+        // save the pet to the db
+        const patient = {
+            _id,
+            patient: {
+                name,
+                type,
+                breed,
+                gender,
+                photo,
+                last_visit
+            },
+            owner: {
+                first_name,
+                last_name,
+                phone_number
+            },
+            prescriptions
+        }
+        // stitch.savePet(id, patient);
     }
 
     addPrescription = (prescription) => {
@@ -33,7 +85,6 @@ class PetForm extends Component {
     }
 
     handleChange = (event) => {
-
         this.setState({ [event.target.name]: event.target.value });
     }
     render() {
@@ -86,15 +137,16 @@ class PetForm extends Component {
                             <input type="text" className="form-control" name="breed" value={this.state.breed} onChange={this.handleChange} />
                         </div>
                         <div className="form-group">
-                            <label >Type</label>
-                            <input type="text" readOnly className="form-control" name="lastVisit" value={this.state.lastVisit} onChange={this.handleChange} />
+                            <label >Last Visit</label>
+                            <input type="text" readOnly className="form-control" name="last_visit" value={this.state.last_visit} onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="col-md-6" >
 
-                    <img className="img-circle" src="https://images.pexels.com/photos/460823/pexels-photo-460823.jpeg"style={{height:"auth", maxWidth:"100%"}} />
+                        <img className="img-circle" src={this.state.photo} style={{ height: "auth", maxWidth: "100%" }} />
                     </div>
                 </div>
+                <button onClick={this.onSave} type="button" className="btn btn-primary">Save</button>
 
             </div>
         );
