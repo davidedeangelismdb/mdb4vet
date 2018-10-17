@@ -18,9 +18,12 @@ class AppointmentList extends Component {
                 <div>
                     {this.state.appts.map(appt => {
                         return (
-                            <AppointmentWrapper>
-                                <AppointmentPage appt={appt} />
-                            </AppointmentWrapper>
+                            <div>
+                                <AppointmentWrapper appt={appt}>
+                                    <AppointmentPage appt={appt} />
+                                </AppointmentWrapper>
+                                <div style={{paddingTop: "18px"}}/>
+                            </div>
                         )
                     })}
                 </div>

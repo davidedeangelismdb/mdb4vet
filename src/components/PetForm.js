@@ -11,50 +11,25 @@ class PetForm extends Component {
         first_name: null,
         last_name: null,
         phone_number: null,
-        name : null,
-        _id : null
+        name: null,
+        _id: null
     }
 
     componentWillReceiveProps(props) {
         const pet = props.pet;
-        const {_id } = pet;
+        const { _id } = pet;
         const prescriptions = pet.prescriptions;
-        const { gender, breed, name, type, last_visit, photo} = pet.patient;
+        const { gender, breed, name, type, last_visit, photo } = pet.patient;
         const { first_name, last_name, phone_number } = pet.owner;
         this.setState({ prescriptions, gender, type, breed, last_visit, first_name, last_name, phone_number, name, _id, photo });
     }
-
-    /*
-    {
-        "_id" : ObjectId("5bc63017094a567c340c812f"),
-        "patient" : {
-            "name" : "Cuddles",
-            "type" : "dog",
-            “Breed” : “poodle”
-            "gender" : "female",
-            "photo" : null,
-            "last_visit" : ISODate("2018-10-02T19:33:01Z")
-        },
-        "owner" : {
-            "first_name" : "Davide",
-            "last_name" : "De Angelis",
-            "phone_number" : "2223334444"
-        },
-        "prescriptions" : [
-            {
-                "name" : "anti-nausea",
-                "start" : ISODate("2018-09-10T00:00:00Z"),
-                "end" : ISODate("2018-09-17T00:00:00Z"),
-                “active” : true
-            }
-        ]
-    }
-    */
+    
     onSave = () => {
         const { _id, name, prescriptions, gender, breed, type, last_visit, first_name, last_name, phone_number, photo } = this.state;
+        console.log(this.state);
         // save the pet to the db
         const patient = {
-            _id,
+            _id : _id.toString(),
             patient: {
                 name,
                 type,
@@ -70,7 +45,7 @@ class PetForm extends Component {
             },
             prescriptions
         }
-        // stitch.savePet(id, patient);
+        stitch.savePet(patient);
     }
 
     addPrescription = (prescription) => {
@@ -90,6 +65,10 @@ class PetForm extends Component {
     render() {
         return (
             <div>
+                <div className="form-group">
+                    <label forHtml="exampleInputPassword1">Patient Name</label>
+                    <input type="text" className="form-control" name="name" value={this.state.name} onChange={this.handleChange} />
+                </div>
                 <div className="row">
                     <h3 className="col-md-6"> Active Prescriptions</h3>
                     <h3 className="col-md-6"> Inactive Prescriptions</h3>
