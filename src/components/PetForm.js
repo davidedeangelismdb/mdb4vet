@@ -12,7 +12,8 @@ class PetForm extends Component {
         last_name: null,
         phone_number: null,
         name: null,
-        _id: null
+        _id: null,
+        text : ''
     }
 
     componentWillReceiveProps(props) {
@@ -26,7 +27,6 @@ class PetForm extends Component {
     
     onSave = () => {
         const { _id, name, prescriptions, gender, breed, type, last_visit, first_name, last_name, phone_number, photo } = this.state;
-        console.log(this.state);
         // save the pet to the db
         const patient = {
             _id : _id.toString(),
@@ -93,9 +93,10 @@ class PetForm extends Component {
                 <div className="form-group">
                     <div className="input-group">
                         <label >Add Prescription</label>
-                        <input type="text" className="form-control" />
+                        <input name="text" onChange={this.handleChange} type="text" className="form-control" />
                         <div className="input-group-btn">
-                            <button onClick={() => this.addPrescription({ name: "test", active: true })} type="button" className="btn btn-primary">
+                            <button  onClick={() => 
+                                this.addPrescription({ name: this.state.text, active: true })} type="button" className="btn btn-primary">
                                 +
                             </button>
                         </div>
@@ -122,7 +123,7 @@ class PetForm extends Component {
                     </div>
                     <div className="col-md-6" >
 
-                        <img className="img-circle" src={this.state.photo} style={{ height: "auth", maxWidth: "100%" }} />
+                        <img className="img-circle" src={this.state.photo} style={{ height: "auto", maxWidth: "100%" }} />
                     </div>
                 </div>
                 <button onClick={this.onSave} type="button" className="btn btn-primary">Save</button>

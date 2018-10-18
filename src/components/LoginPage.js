@@ -42,9 +42,7 @@ class LoginPage extends Component {
                         <input type="password" name="password" onChange={this.handleChange} value={this.state.password} className="form-control" id="pwd" placeholder="Password" />
                     </div>
                     <br />
-                    <div className="align-center">
-                        <button type="button" className="btn btn-default" id="login" onClick={this.login}>Login</button>
-                    </div>
+                    <button type="button" className="btn btn-block btn-success" id="login" onClick={this.login}>Login</button>
                 </form>
             </div>
         </div>
@@ -52,9 +50,8 @@ class LoginPage extends Component {
     
     return <div>
         {body}
-        {this.state.loggedIn && <button type="button" className="btn btn-default" onClick={this.logout}>Logout</button>}
-    </div>
-       
+        {this.state.loggedIn && <button type="button" className="btn btn-block btn-warning" onClick={this.logout}>Logout</button>}
+    </div> 
     }
 }
 

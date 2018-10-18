@@ -24,7 +24,7 @@ class AppointmentPage extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div>
                 <div className="page-header">
                     <h1>
                         Appointment for {this.state.petName}

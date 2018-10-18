@@ -14,7 +14,7 @@ class AppointmentList extends Component {
     }
     render() {
         return (
-            <div className="container">
+            <div>
                 <div>
                     {this.state.appts.map(appt => {
                         return (
