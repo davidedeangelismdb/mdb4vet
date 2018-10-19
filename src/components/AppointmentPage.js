@@ -31,10 +31,7 @@ class AppointmentPage extends Component {
                     </h1>
                 </div>
                 <form>
-                    <div className="form-group">
-                        <label forHtml="exampleInputPassword1">Seeing Vet</label>
-                        <input type="text" readOnly className="form-control" id="exampleInputPassword1" value={this.state.vetName}/>
-                    </div>
+      
                     <PetForm pet={this.state.pet}/>
                 </form>
             </div>

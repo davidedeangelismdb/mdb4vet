@@ -83,6 +83,36 @@ db.patients.insert({
 		}
 	]
 });
+db.patients.insert({
+	"_id" : ObjectId("507f191e810c19729de860aa"),
+	"patient" : {
+		"name" : "Nibler",
+		"type" : "Guinea Pig",
+		"breed" : "tabby",
+		"gender" : "male",
+		"photo" : "https://petco.scene7.com/is/image/PETCO/849430-center-3?$ProductDetail-large$",
+		"last_visit" : ISODate("2018-10-01T19:33:01Z")
+	},
+	"owner" : {
+		"first_name" : "Jim",
+		"last_name" : "Bob",
+		"phone_number" : "22235344444"
+	},
+	"prescriptions" : [
+		{
+			"name" : "anxiety medicine",
+			"start" : ISODate("2018-09-10T00:00:00Z"),
+			"end" : ISODate("2018-09-17T00:00:00Z"),
+			"active" : true
+        },
+        {
+			"name" : "stress medicine",
+			"start" : ISODate("2018-09-10T00:00:00Z"),
+			"end" : ISODate("2018-09-17T00:00:00Z"),
+			"active" : true
+		}
+	]
+});
 
 db.appointments.drop();
 db.appointments.insert({
@@ -99,6 +129,12 @@ db.appointments.insert({
 });
 db.appointments.insert({
 	"patient_id" : ObjectId("507f191e810c19729de860dd"),
+	"vet_id" : 33,
+	"date" : ISODate("2018-10-16T18:23:20.788Z"),
+	"desc" : "Mr Meows is great!"
+});
+db.appointments.insert({
+	"patient_id" : ObjectId("507f191e810c19729de860aa"),
 	"vet_id" : 33,
 	"date" : ISODate("2018-10-16T18:23:20.788Z"),
 	"desc" : "Mr Meows is great!"
